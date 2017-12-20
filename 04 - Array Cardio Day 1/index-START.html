@@ -31,28 +31,98 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteen = inventors.filter(function(inventor) {
+      if(inventor.year >= 1500 && inventor.year < 1600) {
+        return true; // keep it!
+      }
+    });
+    console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const names = inventors.map(function(inventor) {
+      return inventor.first + " " + inventor.last;
+    });
+    console.table(names);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const oldToYoung = inventors.sort(function(a, b) {
+      return a.year - b.year;
+    });
+    console.table(oldToYoung);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const totalYears = inventors.reduce(function(total, inventor) {
+      return total + (inventor.passed - inventor.year);
+    }, 0);
+    console.log(totalYears);
 
     // 5. Sort the inventors by years lived
+    const yearsLived = inventors.sort(function(a, b) {
+      const livingA = a.passed - a.year;
+      const livingB = b.passed - b.year;
+      return livingA - livingB;
+    });
+    console.table(yearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    const category = document.querySelector('.mw-category');
+    const links = Array.from(category.querySelectorAll('a'));
+    const de = links
+                .map(link => link.textContent)
+                .filter(streetName => streetName.includes('de'));
+    // const blvdsInParis = ["Boulevard Auguste-Blanqui",
+    //                       "Boulevard Barbès",
+    //                       "Boulevard Beaumarchais",
+    //                       "Boulevard de l'Amiral-Bruix",
+    //                       "Boulevard des Capucines",
+    //                       "Boulevard de la Chapelle",
+    //                       "Boulevard de Clichy",
+    //                       "Boulevard du Crime",
+    //                       "Boulevard Haussmann",
+    //                       "Boulevard de l'Hôpital",
+    //                       "Boulevard des Italiens",
+    //                       "Boulevard de la Madeleine",
+    //                       "Boulevard de Magenta",
+    //                       "Boulevard Montmartre",
+    //                       "Boulevard du Montparnasse",
+    //                       "Boulevard Raspail",
+    //                       "Boulevard Richard-Lenoir",
+    //                       "Boulevard de Rochechouart",
+    //                       "Boulevard Saint-Germain",
+    //                       "Boulevard Saint-Michel",
+    //                       "Boulevard de Sébastopol",
+    //                       "Boulevard de Strasbourg",
+    //                       "Boulevard du Temple",
+    //                       "Boulevard Voltaire",
+    //                       "Boulevard de la Zone"]
+    // const blvdsWithDe = blvdsInParis.filter(function(blvd) {
+    //   if(blvd.toUpperCase().includes("DE")) {
+    //     return true;
+    //   }
+    // });
+    // console.table(blvdsWithDe);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedByLast = people.sort();
+    console.table(sortedByLast);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const counted = data.reduce(function(allData, data) {
+      if (data in allData) {
+        allData[data]++;
+      } else {
+        allData[data] = 1;
+      }
+      return allData
+    }, {});
+    console.log(counted);
 
   </script>
 </body>
