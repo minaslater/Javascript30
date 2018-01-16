@@ -17,7 +17,6 @@ let direction = true;
 
 function draw(e) {
   if (!isDrawing) return;
-  console.log(e);
   context.beginPath(); //start from
   context.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   context.moveTo(lastX, lastY); //go to
